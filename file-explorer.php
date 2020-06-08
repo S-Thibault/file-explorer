@@ -1,3 +1,24 @@
+<?php
+
+//Disable error report for undefined superglobals
+error_reporting( error_reporting() & ~E_NOTICE );
+
+//Security options
+$allow_delete = true; // Set to false to disable delete button and delete POST request.
+$allow_create_folder = true; // Set to false to disable folder creation
+$allow_upload = true; // Set to true to allow upload files
+$allow_direct_link = true; // Set to false to only allow downloads and not direct link
+// Sometimes you may need to hide sensitive files. Add them here
+$files_to_skip = array(
+    '.',
+    '..',
+    'index.php'
+);
+
+
+
+?>
+
 <html>
 <head>
 	<title>Files-Explorer</title>
@@ -42,6 +63,23 @@ $chemin = $data.'/'.$dir;
         <?php
           echo '<a href='.$_SERVER['PHP_SELF'].'><img src="images/dir-close.gif" border=0 />&nbsp;/</a><br/>';
           explorer_rep($data, $chemin, 1);
+
+					function moveFile($dossierSource , $dossierDestination){
+				 
+				      $retour = 1;
+				      if(!file_exists($dossierSource)) {
+				       $retour = -1;
+				      } else {
+				       if(!copy($dossierSource, $dossierDestination)) {
+				       $retour = -2;
+				       } else {
+				       if(!unlink($dossierSource)) {
+				       $retour = -3;
+				       }
+				       }
+				      }
+				      return($retour);
+				     }
         ?>
     		</div>
         		</div>
@@ -63,6 +101,6 @@ $chemin = $data.'/'.$dir;
   <?php
     explorer_fichier($chemin);
   ?>
-  
+
   </body>
   </html>
