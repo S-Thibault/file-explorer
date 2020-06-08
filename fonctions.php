@@ -2,8 +2,8 @@
 include 'configuration.php';
 
 
-/* extraction taille totale d'un dossier, 
-   et calcul du nombre de fichiers et de 
+/* extraction taille totale d'un dossier,
+   et calcul du nombre de fichiers et de
    dossiers contenus */
 function getSize($data) {
   global $nfile, $ndir;
@@ -115,15 +115,15 @@ function assocExt($ext) {
 
 
 /* format de type de fichier */
-function mfunGetPerms( $in_Perms ) { 
+function mfunGetPerms( $in_Perms ) {
    $sP;
 
    if($in_Perms & 0x1000)     // FIFO pipe
-     $sP = 'p'; 
+     $sP = 'p';
    elseif($in_Perms & 0x2000) // Character special
-     $sP = 'c'; 
+     $sP = 'c';
    elseif($in_Perms & 0x4000) // Directory
-     $sP = 'd'; 
+     $sP = 'd';
    elseif($in_Perms & 0x6000) // Block special
      $sP = 'b';
    elseif($in_Perms & 0x8000) // Regular
@@ -133,25 +133,25 @@ function mfunGetPerms( $in_Perms ) {
    elseif($in_Perms & 0xC000) // Socket
      $sP = 's';
    else                       // UNKNOWN
-     $sP = 'u'; 
+     $sP = 'u';
 
    // owner
    $sP .= (($in_Perms & 0x0100) ? 'r' : '&minus;') .
-          (($in_Perms & 0x0080) ? 'w' : '&minus;') . 
-          (($in_Perms & 0x0040) ? (($in_Perms & 0x0800) ? 's' : 'x' ) : 
-                                  (($in_Perms & 0x0800) ? 'S' : '&minus;')); 
+          (($in_Perms & 0x0080) ? 'w' : '&minus;') .
+          (($in_Perms & 0x0040) ? (($in_Perms & 0x0800) ? 's' : 'x' ) :
+                                  (($in_Perms & 0x0800) ? 'S' : '&minus;'));
 
    // group
    $sP .= (($in_Perms & 0x0020) ? 'r' : '&minus;') .
-          (($in_Perms & 0x0010) ? 'w' : '&minus;') . 
-          (($in_Perms & 0x0008) ? (($in_Perms & 0x0400) ? 's' : 'x' ) : 
-                                  (($in_Perms & 0x0400) ? 'S' : '&minus;')); 
+          (($in_Perms & 0x0010) ? 'w' : '&minus;') .
+          (($in_Perms & 0x0008) ? (($in_Perms & 0x0400) ? 's' : 'x' ) :
+                                  (($in_Perms & 0x0400) ? 'S' : '&minus;'));
 
    // world
    $sP .= (($in_Perms & 0x0004) ? 'r' : '&minus;') .
-          (($in_Perms & 0x0002) ? 'w' : '&minus;') . 
-          (($in_Perms & 0x0001) ? (($in_Perms & 0x0200) ? 't' : 'x' ) : 
-                                  (($in_Perms & 0x0200) ? 'T' : '&minus;')); 
+          (($in_Perms & 0x0002) ? 'w' : '&minus;') .
+          (($in_Perms & 0x0001) ? (($in_Perms & 0x0200) ? 't' : 'x' ) :
+                                  (($in_Perms & 0x0200) ? 'T' : '&minus;'));
    return $sP;
  }
 
@@ -177,27 +177,27 @@ function inforep($chemin,$data) {
   return $tableau;
 }
 
-function explorer_fichier($repertoire) 
+function explorer_fichier($repertoire)
 {
 global $data; //appel des variables qui sont hors de la fonction
 // on remplace les caracteres posants problemes
 	$a_remplacer = array("..", "/.", "\"", "./", "//");
 	$repertoire = str_replace($a_remplacer, "", $repertoire);
-if ($dir = opendir($repertoire)) 
+if ($dir = opendir($repertoire))
 	{
 	// tableaux
 	$rep = array();
 	$fichier = array();
 	while($var = readdir($dir))
 		{
-		if(is_dir($repertoire."/".$var)) 
+		if(is_dir($repertoire."/".$var))
 			{
-			if(!in_array($var, array(".",".."))) 
+			if(!in_array($var, array(".","..")))
 				{
 				$rep[] = inforep($var,$repertoire);
 				}
   			}
-		else 
+		else
 			{
 			$fichier[] = infofichier($var,$repertoire);
 			}
@@ -249,7 +249,7 @@ function explorer_rep($repertoire, $chemin, $marge=1)
 	$affichage_simple = str_replace($a_remplacer, "_", $affichage);
 	$chemin_simple = str_replace($a_remplacer, "_", $chemin);
 	$repertoire_simple = str_replace($a_remplacer, "_", $repertoire);
-	// on affiche les repertoires qui contiennent uniquement ceux demandés. 
+	// on affiche les repertoires qui contiennent uniquement ceux demandés.
 	if(preg_match('/'.$repertoire_simple.'/', $chemin_simple))
 		{
 		// marge sur les repertoires
@@ -260,7 +260,7 @@ function explorer_rep($repertoire, $chemin, $marge=1)
 		if($chemin == $repertoire.'/'.$affichage)
 			{
 			echo '<b style="FONT-WEIGHT: bold"><img src="images/dir-open.gif" />'.$affichage.'</b><br/>';
-			} 
+			}
 		// on met une icone special pour le repertoire qui fait parti du chemin
 		elseif(preg_match('/'.$affichage_simple.'/', $chemin_simple))
 			{
@@ -270,11 +270,11 @@ function explorer_rep($repertoire, $chemin, $marge=1)
 			{
 			echo '<a href='.$_SERVER['PHP_SELF'].'?dir='.rawurlencode(str_replace($data.'/', "", $repertoire.'/'.$affichage)).'><img src="images/dir-close.gif" border=0 />'.$affichage.'</a><br/>';
 			}
-		
+
 		explorer_rep($repertoire.'/'.$affichage, $chemin, $marge+1); // fonction recursif pour explorer le nouveau repertoire
 		}
         }
-    
+
     closedir($le_repertoire);
 }
 
