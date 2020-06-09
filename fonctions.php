@@ -283,4 +283,4 @@ function open_fenetre()
                                 window.open('pageb.html','nom_de_ma_popup','menubar=no, scrollbars=no, top=100, left=100, width=300, height=200');
                         }
 
-?>
+?> 
