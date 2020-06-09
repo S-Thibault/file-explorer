@@ -48,9 +48,9 @@ float:left;
 /* height:170px; */
 }
 .footer {
-width: 100%; /* On a indiqu� une largeur (obligatoire) */
+width: 100%; /* On a indiqué une largeur (obligatoire) */
 float:left;
-/* margin: auto; /* On peut donc demander � ce que le bloc soit centr� avec auto */
+/* margin: auto; /* On peut donc demander à ce que le bloc soit centré avec auto */
 margin-top:60px;
 }
 .droit {
@@ -64,19 +64,7 @@ text-align: center;
 text-align: left;
 margin-left:15px;
 }
-.bleu-italic{
-	color: #00008B; /* darkblue; */
-	font-family: sans-serif, Arial, Helvetica;
-	font-size: 1.4em;
-	font-weight: bold;
-	font-style: italic;
-}
-.bleu-italic a{
-	color: #000000;
-	font-size: 0.8em;
-	font-weight: bold;
-	font-style: normal;
-}
+
 img {
 vertical-align:top;
 margin:0 5px 0 5px;
@@ -127,11 +115,7 @@ max-width: 98%;
 div.main {
 width: 99%;
 }
-#google {	/* partie à cacher*/
-	visibility: hidden;
-	display:none;
-	}
-}
+
 		/*	pour les ecrans > 959px	*/	/*	pour les ecrans > 959px	*/
 @media (max-width: 959px){
 body {
@@ -139,10 +123,8 @@ body {
 	padding:0;
 	background-color:#a4a2a4;
 }
-#cacher, #google {	/* partie à cacher */
-/* visibility: hidden; */
-display: none;
-}
+
+
 div.contenu {
 border-radius:0;
 padding: 10px 0px 0px 0px;
@@ -182,4 +164,3 @@ top: 850px;
 	margin:0 0 30px 0;
 }
 }
-
