@@ -1,6 +1,6 @@
 ﻿<?php
 include 'configuration.php'; 
-
+ 
 
 /* extraction taille totale d'un dossier,
    et calcul du nombre de fichiers et de
