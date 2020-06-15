@@ -13,7 +13,7 @@
 <input type="file" name="mon_fichier"><br>
 <input type="submit" value="Envoyer">
 </form>
- 
+
 <?php
 
 //Disable error report for undefined superglobals
