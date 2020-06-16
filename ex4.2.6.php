@@ -13,4 +13,3 @@ imagestring($image, 4, 35, 15, "Salut les Zéros !", $blanc);
 imagepng($image);
 ?>
   
-
